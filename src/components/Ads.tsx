@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Ads() {
+  const navigate = useNavigate();
   return (
     <section className="bg-white py-20">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between ">
@@ -19,7 +22,7 @@ export default function Ads() {
             cấp độ, theo dõi kết quả chi tiết, xác định điểm yếu và cải thiện
             mỗi ngày.
           </p>
-          <button className="bg-green-500 hover:bg-green-600 text-white font-medium px-6 py-3 rounded-md transition">
+          <button onClick={() => navigate("/quiz")} className="bg-green-500 hover:bg-green-600 text-white font-medium px-6 py-3 rounded-md transition">
             Bắt đầu miễn phí
           </button>
         </div>

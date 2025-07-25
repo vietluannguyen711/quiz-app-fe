@@ -7,7 +7,7 @@ export default function Header() {
       <nav className="w-[488px] h-[24px]">
         <ul className="text-gray-900 font-family-[Inter]   text-[16px] flex justify-between">
           <li className="font-medium">
-            <a href="">Home</a>
+            <a href="/">Home</a>
           </li>
           <li>
             <a href="">Service</a>
