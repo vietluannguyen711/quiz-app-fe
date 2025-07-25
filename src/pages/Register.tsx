@@ -1,4 +1,16 @@
+import { useForm } from "react-hook-form";
+import { authApi, type RegisterRequest } from "../api/authApi";
+
 export default function Register() {
+    const { register, handleSubmit, formState: { errors } } = useForm<RegisterRequest>();
+    const onSubmit = (data: RegisterRequest) => {
+        console.log(data);
+        authApi.register(data).then((res) => {
+            console.log(res);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
     return (
         <>
             <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -18,19 +30,15 @@ export default function Register() {
 
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                        <form method="POST" action="#">
+                        <form onSubmit={handleSubmit(onSubmit)}>
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium leading-5  text-gray-700">Name</label>
                                 <div className="mt-1 relative rounded-md shadow-sm">
-                                    <input id="name" name="name" placeholder="John Doe" type="text"
+                                    <input id="name" placeholder="John Doe" type="text" {...register("name", { required: true })}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    {errors.name && <p className="text-red-500 text-sm">Name is required</p>}
                                     <div className="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                        <svg className="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                                                clip-rule="evenodd">
-                                            </path>
-                                        </svg>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -39,9 +47,11 @@ export default function Register() {
                                 <label htmlFor="username" className="block text-sm font-medium leading-5 text-gray-700">Username</label>
                                 <div className="mt-1 flex rounded-md shadow-sm">
 
-                                    <input id="username" name="username" placeholder="john" type="text"
+                                    <input id="username" placeholder="john" type="text" {...register("username", { required: true })}
                                         className="h-10 flex-1  border border-gray-300 form-input pl-3 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+
                                 </div>
+                                {errors.username && <p className="text-red-500 text-sm">Username is required</p>}
                             </div>
 
                             <div className="mt-6">
@@ -49,15 +59,12 @@ export default function Register() {
                                     Email address
                                 </label>
                                 <div className="mt-1 relative rounded-md shadow-sm">
-                                    <input id="email" name="email" placeholder="user@example.com" type="email"
+                                    <input id="email" placeholder="user@example.com" type="email" {...register("email", { required: true })}
 
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    {errors.email && <p className="text-red-500 text-sm">Email is required</p>}
                                     <div className="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                        <svg className="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -67,8 +74,9 @@ export default function Register() {
                                     Password
                                 </label>
                                 <div className="mt-1 rounded-md shadow-sm">
-                                    <input id="password" name="password" type="password"
+                                    <input id="password" type="password" {...register("password", { required: true })}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    {errors.password && <p className="text-red-500 text-sm">Password is required</p>}
                                 </div>
                             </div>
 
@@ -77,8 +85,9 @@ export default function Register() {
                                     Confirm Password
                                 </label>
                                 <div className="mt-1 rounded-md shadow-sm">
-                                    <input id="password_confirmation" name="password_confirmation" type="password"
+                                    <input id="password_confirmation" type="password" {...register("password_confirmation", { required: true })}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    {errors.password_confirmation && <p className="text-red-500 text-sm">Password confirmation is required</p>}
                                 </div>
                             </div>
 
