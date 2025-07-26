@@ -4,18 +4,18 @@ import { useAuth } from "../contexts/AuthContext";
 import Logo from "./Logo";
 
 export default function Header() {
- 
+
   const navigate = useNavigate();
-  const {user, setUser} = useAuth();
-  const handleLogout = () => {
-    userApi.logout().then((res) => {
-      console.log(res);
+  const { user, setUser } = useAuth();
+  const handleLogout = async () => {
+    try {
+      await userApi.logout();
       setUser(null);
       localStorage.removeItem("token");
       navigate("/login");
-    }).catch((err) => {
+    } catch (err) {
       console.log(err);
-    });
+    };
   }
   return (
     <div className="flex items-center justify-around h-[84px]">
