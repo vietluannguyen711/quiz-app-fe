@@ -1,6 +1,22 @@
+import { useNavigate } from "react-router-dom";
+import { userApi } from "../api/userApi";
+import { useAuth } from "../contexts/AuthContext";
 import Logo from "./Logo";
 
 export default function Header() {
+ 
+  const navigate = useNavigate();
+  const {user, setUser} = useAuth();
+  const handleLogout = () => {
+    userApi.logout().then((res) => {
+      console.log(res);
+      setUser(null);
+      localStorage.removeItem("token");
+      navigate("/login");
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
   return (
     <div className="flex items-center justify-around h-[84px]">
       <Logo />
@@ -27,12 +43,19 @@ export default function Header() {
         </ul>
       </nav>
       <div className="authen text-sm flex gap-[14px]">
-        <button >
-            <span className="text-[#4CAF4F] inline-block pt-[10px] pb-[10px] pr-[20px] pl-[20px] ">Login</span>
-        </button>
-        <button className="">
-            <span className="text-white inline-block bg-[#4CAF4F] pt-[10px] pb-[10px] pr-[20px] pl-[20px] rounded-[6px]">Sign up</span>
-        </button>
+        {user ? (
+          <div className="flex gap-4 items-center">
+            <span>👋 Xin chào, <strong>{user.username}</strong></span>
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+            >
+              Thoát
+            </button>
+          </div>
+        ) : (
+          <a href="/login" className="text-blue-600 hover:underline">Đăng nhập</a>
+        )}
       </div>
     </div>
   );

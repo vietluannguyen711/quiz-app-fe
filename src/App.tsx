@@ -6,22 +6,25 @@ import DashboardPage from "./pages/Dashboard";
 import QuizPage from "./pages/QuizPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { AuthProvider } from "./contexts/AuthContext";
 // import QuizPage from "./pages/QuizPage";
 
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<UserLayout />}>
-          <Route index element={<Home />} />
-          <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="quiz" element={<QuizPage />} />
-          
-          
-        </Route>
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<UserLayout />}>
+            <Route index element={<Home />} />
+            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="quiz" element={<QuizPage />} />
+
+
+          </Route>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Routes>
+      </AuthProvider>
     </>
   );
 }
