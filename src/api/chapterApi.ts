@@ -1,8 +1,8 @@
 import axiosInstance from "./axios"
 
-export const gradeApi = {
+export const chapterApi = {
     getAll: async () => {
-        const response = await axiosInstance.get("/grades");
+        const response = await axiosInstance.get("/chapters/all");
         return response.data;
     }
 }

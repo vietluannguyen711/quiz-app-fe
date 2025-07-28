@@ -3,7 +3,6 @@ import "./App.css";
 import UserLayout from "./layouts/UserLayout";
 import Home from "./pages/Home";
 import DashboardPage from "./pages/Dashboard";
-import QuizPage from "./pages/QuizPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -11,6 +10,7 @@ import RequireRole from "./routes/RequireAdmin";
 import AdminDashboard from "./pages/AdminDashboard";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import ShowQuizzes from "./pages/ShowQuizzes";
 // import QuizPage from "./pages/QuizPage";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<UserLayout />}>
             <Route index element={<Home />} />
             <Route path="dashboard" element={<DashboardPage />} />
-            <Route path="quiz" element={<QuizPage />} />
+            <Route path="quiz" element={<ShowQuizzes />} />
 
 
           </Route>
